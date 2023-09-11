@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+    <link rel="stylesheet" href="css/style.css">
+    <title>PlantUML Server</title>
+</head>
+
+<body>
+    <h2 class="text-center">PlantUML Server</h2>
+    <div class="is-center mb-1">
+        <a id="png-btn" class="button secondary" >PNG</a>
+        <a id="svg-btn" class="button secondary">SVG</a>
+        <a id="ascii-btn" class="button secondary">ASCII</a>
+    </div>
+    <div class="row is-center">
+        <div class="col-5">
+            <div id="editor-container" class="monaco-container"></div>
+        </div>
+        <div class="col-5">
+            <div id="preview-container" class="monaco-container" ></div>
+        </div>
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
