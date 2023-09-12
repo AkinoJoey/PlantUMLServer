@@ -17,19 +17,45 @@ require(['vs/editor/editor.main'], function () {
 
     editor.onDidChangeModelContent(async function (event) {
         const plantUmlText = editor.getValue();
-        const encoded = await encode(plantUmlText);
+        const encoded = await encode(plantUmlText,format);
 
-        // if(format == "png" || format == "svg"){
-        //     previewContainer.innerHTML = `<img src="${encoded}">`;
-        // }if(format == "txt"){
-        //     let ascii = await getAscii(encoded);
-        //     previewContainer.innerHTML = `<pre>${ascii}</pre>`;
-
-        // }
-
-        console.log(encoded);
-
+        if(format == "png" || format == "svg"){
+            previewContainer.innerHTML = `<img src="${encoded}">`;
+        }if(format == "txt"){
+            let ascii = await getAscii(encoded);
+            previewContainer.innerHTML = `<pre>${ascii}</pre>`;
+        }
     });
+
+    pngBtn.addEventListener('click',async function(){
+        if(format != 'png'){
+            const plantUmlText = editor.getValue();
+            const encoded = await encode(plantUmlText,'png');
+            previewContainer.innerHTML = `<img src="${encoded}">`;
+        }
+
+        format = 'png';
+    })
+
+    svgBtn.addEventListener('click',async function(){
+        if(format != 'svg'){
+            const plantUmlText = editor.getValue();
+            const encoded = await encode(plantUmlText,'svg');
+            previewContainer.innerHTML = `<img src="${encoded}">`;
+        }
+        format = 'svg';
+    })
+
+    asciiBtn.addEventListener('click',async function(){
+        if(format != 'txt'){
+            const plantUmlText = editor.getValue();
+            const encoded = await encode(plantUmlText,'txt');
+            let ascii = await getAscii(encoded);
+            previewContainer.innerHTML = `<pre>${ascii}</pre>`;
+        }
+
+        format = 'txt';
+    })
 
 });
 
