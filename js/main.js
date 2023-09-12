@@ -4,6 +4,7 @@ const previewContainer = document.getElementById('preview-container');
 const pngBtn = document.getElementById('png-btn');
 const svgBtn = document.getElementById('svg-btn');
 const asciiBtn = document.getElementById('ascii-btn');
+const downloadBtn = document.getElementById('download-btn');
 
 require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs' } });
 
@@ -63,8 +64,13 @@ require(['vs/editor/editor.main'], function () {
         format = 'txt';
     })
 
-});
+    downloadBtn.addEventListener('click', async function(){
+        let plantUmlText = editor.getValue();
+        let encoded = await encode(plantUmlText,format);
+        download(encoded + ".png",format);
 
+    });
+})
 
 async function encode(text,format) {
     let res = await fetch('encode.php', {
@@ -84,4 +90,22 @@ async function getAscii(encoded){
     .then(response=> response.text())
 
     return res;
+}
+
+async function download(text,format) {
+    let res = await fetch('download.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: text
+    })
+    // .then(response => response.blob())
+    // .then(blob => {
+    //     const url = window.URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     a.href = url;
+    //     a.download = `plantuml.${format}`;
+    //     document.body.appendChild(a);
+    //     a.click();
+    //     window.URL.revokeObjectURL(url);
+    // });
 }
