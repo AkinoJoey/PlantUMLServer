@@ -9,4 +9,4 @@ $format = $data['format'];
 $text = $data['text'];
 $encode = encodep($text);
 
-echo "http://www.plantuml.com/plantuml/{$format}/{$encode}";
+echo "https://www.plantuml.com/plantuml/{$format}/{$encode}";
