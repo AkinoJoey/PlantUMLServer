@@ -3,13 +3,10 @@ require __DIR__ . '/vendor/autoload.php';
 use function Jawira\PlantUml\encodep;
 
 $json = file_get_contents('php://input');
-// $data = json_decode($json,false);
+$data = json_decode($json,true);
 
-// $format = $data->format;
-// $text = $data->text;
-// $encode = encodep($text);
+$format = $data['format'];
+$text = $data['text'];
+$encode = encodep($text);
 
-echo $json->text;
-
-
-// echo "http://www.plantuml.com/plantuml/{$format}/{$encode}";
+echo "http://www.plantuml.com/plantuml/{$format}/{$encode}";
