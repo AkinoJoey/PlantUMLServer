@@ -14,10 +14,11 @@ require(['vs/editor/editor.main'], function () {
         automaticLayout: true
     });
 
+    // 初期の表示
+    displayPreview(editor.getValue());
 
-    editor.onDidChangeModelContent(async function (event) {
-        const plantUmlText = editor.getValue();
-        const encoded = await encode(plantUmlText,format);
+    async function displayPreview(text){
+        const encoded = await encode(text,format);
 
         if(format == "png" || format == "svg"){
             previewContainer.innerHTML = `<img src="${encoded}">`;
@@ -25,6 +26,11 @@ require(['vs/editor/editor.main'], function () {
             let ascii = await getAscii(encoded);
             previewContainer.innerHTML = `<pre>${ascii}</pre>`;
         }
+    }
+
+    editor.onDidChangeModelContent(async function (event) {
+        const plantUmlText = editor.getValue();
+        displayPreview(plantUmlText);
     });
 
     pngBtn.addEventListener('click',async function(){
