@@ -67,8 +67,19 @@ require(['vs/editor/editor.main'], function () {
     downloadBtn.addEventListener('click', async function(){
         let plantUmlText = editor.getValue();
         let encoded = await encode(plantUmlText,format);
-        download(encoded + ".png",format);
+        let filePath = await download(encoded ,format);
+        
+        const downloadLink = document.createElement("a");
+        downloadLink.href = filePath;
+        downloadLink.download = `plantUML.${format}`; 
 
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        let resDeletedFile = await deleteFile(filePath);
+        console.log(resDeletedFile);
     });
 })
 
@@ -92,20 +103,24 @@ async function getAscii(encoded){
     return res;
 }
 
-async function download(text,format) {
+async function download(url,format) {
     let res = await fetch('download.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: text
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({'format': format, 'url':url})
     })
-    // .then(response => response.blob())
-    // .then(blob => {
-    //     const url = window.URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.href = url;
-    //     a.download = `plantuml.${format}`;
-    //     document.body.appendChild(a);
-    //     a.click();
-    //     window.URL.revokeObjectURL(url);
-    // });
+    .then(response => response.text())
+
+    return res;
+}
+
+async function deleteFile(filePath){
+    let res = await fetch('deleteFile.php',{
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: filePath
+    })
+    .then(response => response.text())
+    
+    return res;
 }
