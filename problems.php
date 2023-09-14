@@ -1,3 +1,10 @@
+<?php
+
+$id = $_POST['id'] ?? 1;
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -24,6 +31,6 @@
         </div>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.min.js"></script>
-<script src="js/problem.js"></script>
+<script src="js/problems.js"></script>
 </body>
 </html>
