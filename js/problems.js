@@ -1,7 +1,11 @@
 let previewContent = "preview";
 let format = 'png';
 const previewContainer = document.getElementById('preview-container');
+const answerContainer = document.getElementById('answer-container');
 const answerBtn = document.getElementById('answer-btn');
+const answerUrl = document.querySelector('#answer-container img').src;
+const umlText = document.querySelector('#answer-container p').textContent;
+
 
 require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs' } });
 
@@ -28,8 +32,12 @@ require(['vs/editor/editor.main'], function () {
     answerBtn.addEventListener('click',function(){
         if(answerBtn.textContent == 'Show Answer'){
             answerBtn.textContent = 'Hide Answer';
+            answerContainer.innerHTML = "";
+            answerContainer.innerText = umlText;
+            
         }else{
             answerBtn.textContent = 'Show Answer';
+            answerContainer.innerHTML = `<img src="${answerUrl}">`;
         }
     })
 
