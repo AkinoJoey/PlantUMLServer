@@ -1,7 +1,15 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
+
+use function Jawira\PlantUml\encodep;
 
 $id = $_POST['id'] ?? 1;
 
+$json = file_get_contents('./problems/problems.json');
+$data = json_decode($json, true);
+$uml = $data[$id]['uml'];
+$encode = encodep($uml);
+$encodeUrl = "https://www.plantuml.com/plantuml/png/{$encode}";
 ?>
 
 
@@ -27,7 +35,10 @@ $id = $_POST['id'] ?? 1;
             <div id="preview-container" class="monaco-container" ></div>
         </div>
         <div class="col">
-            <div id="answer-container"  class="monaco-container" ></div>
+            <div id="answer-container"  class="monaco-container" >
+                <img  src="<?php echo $encodeUrl ?>">
+                <p class="is-hidden"><?php echo $uml ?></p>
+            </div>
         </div>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.min.js"></script>
