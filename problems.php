@@ -6,14 +6,17 @@ use function Jawira\PlantUml\encodep;
 $json = file_get_contents('./problems/problems.json');
 $data = json_decode($json, true);
 
-$id = $_GET['id'] ?? 1;
-$index = $id - 1;
-$title = $data[$index]['title'];
-$uml = $data[$index]['uml'];
-$encode = encodep($uml);
-$encodeUrl = "https://www.plantuml.com/plantuml/png/{$encode}";
-?>
+$id = $_GET['id'] ?? 0;
+$title = "UML問題集";
 
+if($id > 0 && $id <= count($data)){
+    $index = $id - 1;
+    $title = $data[$index]['title'];
+    $uml = $data[$index]['uml'];
+    $encode = encodep($uml);
+    $encodeUrl = "https://www.plantuml.com/plantuml/png/{$encode}";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -25,26 +28,68 @@ $encodeUrl = "https://www.plantuml.com/plantuml/png/{$encode}";
     <title><?php echo $title ?></title>
 </head>
 <body>
-    <h2 class="text-center"><?php echo $title ?></h2>
-    <div class="is-center mb-1">
-        <a id="answer-btn" class="button secondary" >Show Answer</a>
-    </div>
+    <?php if($id == 0 ) : ?>
+        <h2 class="text-center"><?php echo $title ?></h2>
+        <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Theme</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php for($i=0; $i < count($data); $i++): ?>
+                    <tr class="clickable-row" data-href="./problems.php?id=<?php echo $i+1 ?>">
+                        <td><?php echo $data[$i]['id'] ?></td>
+                        <td><?php echo $data[$i]['title'] ?></td>
+                        <td><?php echo $data[$i]['theme'] ?></td>
+                    </tr>
+                <?php endfor; ?>
+            </tbody>
+        </table>
+        </div>
+        
+        <script>
+            const linkElements = document.querySelectorAll('tr[data-href]');
+            linkElements.forEach(linkElement => {
+                const dataHref = linkElement.getAttribute('data-href');
 
-    <div class="row is-center is-marginless">
-        <div class="col-4">
-            <div id="editor-container" class="monaco-container"></div>
+                linkElement.addEventListener('click', () => {
+                window.location.href = dataHref;
+                });
+            });
+        </script>
+        
+
+    <?php elseif($id > 0 && $id <= count($data)): ?>
+        <h2 class="text-center"><?php echo $title ?></h2>
+
+        <div class="is-center mb-1">
+            <a id="answer-btn" class="button secondary" >Show Answer</a>
         </div>
-        <div class="col-4">
-            <div id="preview-container" class="monaco-container" ></div>
-        </div>
-        <div class="col-4">
-            <div id="answer-container"  class="monaco-container" >
-                <img src="<?php echo $encodeUrl ?>">
-                <p class="is-hidden"><?php echo $uml ?></p>
+
+        <div class="row is-center is-marginless">
+            <div class="col-4">
+                <div id="editor-container" class="monaco-container"></div>
+            </div>
+            <div class="col-4">
+                <div id="preview-container" class="monaco-container" ></div>
+            </div>
+            <div class="col-4">
+                <div id="answer-container"  class="monaco-container" >
+                    <img src="<?php echo $encodeUrl ?>">
+                    <p class="is-hidden"><?php echo $uml ?></p>
+                </div>
             </div>
         </div>
-    </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.min.js"></script>
-<script src="js/problems.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.min.js"></script>
+        <script src="js/problems.js"></script>
+    <?php else: ?>
+        <h1 class="text-center">404<br>Page not found</br></h1>
+    <?php endif; ?>
+
 </body>
 </html>
