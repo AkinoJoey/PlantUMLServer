@@ -33,7 +33,10 @@ require(['vs/editor/editor.main'], function () {
         if(answerBtn.textContent == 'Show Answer'){
             answerBtn.textContent = 'Hide Answer';
             answerContainer.innerHTML = "";
-            answerContainer.innerText = umlText;
+            let p = document.createElement('p');
+            p.classList.add('overflow-y-scroll');
+            p.innerText = umlText;
+            answerContainer.append(p);
             
         }else{
             answerBtn.textContent = 'Show Answer';
