@@ -1,14 +1,20 @@
 [
     {
         "id": 1,
-        "title": "ライフラインの活性化",
+        "title": "ログインシステム",
         "theme": "シーケンス図",
-        "uml": "@startuml\nautoactivate on\nalice -> bob : hello\nbob -> bob : self call\nbill -> bob #005500 : hello from thread 2\nbob -> george ** : create\nreturn done in thread 2\nreturn rc\nbob -> george !! : delete\nreturn success\n@enduml"
+        "uml":"@startuml\nparticipant User\nparticipant System\nparticipant Database\n\nUser -> System: ログイン\nSystem -> Database: ユーザー認証\nDatabase --> System: 認証成功\nSystem --> User: ログイン成功メッセージ\n\nUser -> System: メッセージ送信\nSystem -> Database: メッセージ保存\nDatabase --> System: メッセージ保存完了\nSystem --> User: 送信成功メッセージ\n\nUser -> System: ログアウト\nSystem -> Database: ログアウト処理\nDatabase --> System: ログアウト処理完了\nSystem --> User: ログアウト成功メッセージ\n@enduml"
     },
     {
         "id": 2,
-        "title": "test",
+        "title": "オンラインサイトでの注文のプロセス",
         "theme": "シーケンス図",
-        "uml": "@startuml\nautoactivate on\nalice -> bob : hello\nbob -> bob : self call\nbill -> bob #005500 : hello from thread 2\nbob -> george ** : create\nreturn done in thread 2\nreturn rc\nbob -> george !! : delete\nreturn success\n@enduml"
+        "uml":"@startuml\nactor Customer\nparticipant WebApp\nparticipant PaymentGateway\nparticipant OrderSystem\nparticipant InventorySystem\nparticipant ShippingSystem\n\nCustomer -> WebApp: 商品を選択\nCustomer -> WebApp: カートに追加\nCustomer -> WebApp: 注文を確定\n\nWebApp -> Customer: 注文詳細を表示\nWebApp -> PaymentGateway: 支払い情報を送信\nWebApp -> OrderSystem: 注文を登録\nOrderSystem -> InventorySystem: 在庫を確認\nInventorySystem --> OrderSystem: 在庫情報を提供\nOrderSystem -> ShippingSystem: 出荷指示を送信\nShippingSystem --> OrderSystem: 出荷情報を提供\nOrderSystem --> PaymentGateway: 支払いを確定\nPaymentGateway --> WebApp: 支払い承認\nWebApp -> Customer: 注文確認メッセージを表示\n\nWebApp -> Customer: ログアウト\n@enduml"
+    },
+    {
+        "id": 3,
+        "title": "電子メール送信のプロセス",
+        "theme": "シーケンス図",
+        "uml":"@startuml\nactor Customer\nparticipant EmailClient\nparticipant MailServer\nactor Recipient\n\nCustomer -> EmailClient: 電子メールを作成\nEmailClient -> EmailClient: メールの作成と編集\nEmailClient -> MailServer: メールを送信\nMailServer -> MailServer: メールの受信と転送\nMailServer -> Recipient: メールを受信\nRecipient --> MailServer: 受信確認\n\nCustomer -> EmailClient: ログアウト\n@enduml"
     }
 ]
