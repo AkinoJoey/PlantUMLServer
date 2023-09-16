@@ -6,9 +6,10 @@ use function Jawira\PlantUml\encodep;
 $json = file_get_contents('./problems/problems.json');
 $data = json_decode($json, true);
 
-$id = $_GET['id'] ?? 0;
-$title = $data[$id]['title'];
-$uml = $data[$id]['uml'];
+$id = $_GET['id'] ?? 1;
+$index = $id - 1;
+$title = $data[$index]['title'];
+$uml = $data[$index]['uml'];
 $encode = encodep($uml);
 $encodeUrl = "https://www.plantuml.com/plantuml/png/{$encode}";
 ?>
