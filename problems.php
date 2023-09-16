@@ -27,14 +27,15 @@ $encodeUrl = "https://www.plantuml.com/plantuml/png/{$encode}";
     <div class="is-center mb-1">
         <a id="answer-btn" class="button secondary" >Show Answer</a>
     </div>
+
     <div class="row is-center is-marginless">
-        <div class="col">
+        <div class="col-4">
             <div id="editor-container" class="monaco-container"></div>
         </div>
-        <div class="col">
+        <div class="col-4">
             <div id="preview-container" class="monaco-container" ></div>
         </div>
-        <div class="col">
+        <div class="col-4">
             <div id="answer-container"  class="monaco-container" >
                 <img  src="<?php echo $encodeUrl ?>">
                 <p class="is-hidden"><?php echo $uml ?></p>
