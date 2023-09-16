@@ -47,7 +47,7 @@ require(['vs/editor/editor.main'], function () {
 })
 
 async function encode(text,format) {
-    let res = await fetch('encode.php', {
+    let res = await fetch('../encode.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({'format': format, 'text':text})
