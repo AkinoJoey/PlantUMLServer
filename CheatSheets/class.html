@@ -1,0 +1,172 @@
+<h3>クラス図の開始と終了</h3>
+<p>クラス図全体を開始するには、@startumlと@endumlを使用します。これらのキーワードで図の始まりと終わりを示します。</p>
+<pre>
+    <code>
+@startuml
+... // クラス図の内容
+@enduml
+    </code>
+</pre>
+</div>
+
+<h3>クラスの定義</h3>
+<p>クラスとその属性、メソッドを定義します。クラス名はクラスボックス内に配置され、属性とメソッドはクラスボックス内にリスト形式で配置されます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+class Post {
+    -postID: int
+    -content: string
+    -user: User
+    -comments: List< Comment >
+    -likes: int
+    +Post(postID: int, content: string, user: User)
+    +getPostID(): int
+    +getContent(): string
+    +getUser(): User
+    +addComment(comment: Comment): void
+    +getComments(): List< Comment >
+    +like(): void
+    +getLikes(): int
+}
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/RL1B2eCm4DrxYbb6j1S8fGXsKt3XfWSG4oHKOt56DwLtxqoZDKYp2CdBl5yAf6QYUUYJjcyGeHwHu9K0hzEJpxUh1kSf0EteoNhIW3GvtmLmHZjfkFE-3Gq33w66oY6TeGntk8JdtZqixfgP6Ah8AOU3ImwxGneudQNwor1ffCHe6QW2Hn7bHTW2_t9cZJ5hDBL6rbjMdbj6PoBPK4a4_fNAf9GwiYffkYLy9uNrXl_v0m00" alt="">
+    </div>
+</div>
+
+<h3>クラスの関連性の定義</h3>
+<p>クラス間の関連性を表現するために、関連線（Association Line）を使用します。-- は通常の関連性を示し、o-- は Extension を、*-- は Aggregation を、o--* は Composition を示します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+class Post {
+    -postID: int
+    -content: string
+    -user: User
+    -comments: List< Comment >
+    -likes: int
+    +Post(postID: int, content: string, user: User)
+    +getPostID(): int
+    +getContent(): string
+    +getUser(): User
+    +addComment(comment: Comment): void
+    +getComments(): List< Comment >
+    +like(): void
+    +getLikes(): int
+}
+
+class Comment {
+}
+
+class Like {
+}
+
+Post *-- Comment : Aggregation
+Post *-- Like : Aggregation
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/RL4x3eCm3DqvXKSeS86eggZeKec1fGT044LH8LInwO9wzyQ4Nr4pHF7pU_Qpao5LbeQk3UgsGeIoHu8n07VIbtlVRmAq8G_KlI5fI02IrKPvS41f1JpSlP2wpf5GGA6Hpf3x62u-tUgdnArcp0t3NQS43bqIs3f4NgCabPCYZ7QL79fxASCxYvnXDSEhpxXgcjbQE5iMYrV7U_UwsPNr8t61VqF5F5HuL1KywUBm4ymBNfJZ1Z7HnzFsJscwiWHSbR9ILQHxiwKdnMykawPnt_W5" alt="">
+    </div>
+</div>
+
+<h3>抽象クラス、インターフェースの定義</h3>
+<p>抽象クラスは abstract キーワードを使用して、クラスボックスの右上に書かれます。インタフェースはクラス図内でクラス名の下に << interface >> と表示されます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+abstract class User {
+    -userID: int
+    -username: string
+    -email: string
+    +User(userID: int, username: string, email: string)
+    +getUserID(): int
+    +getUsername(): string
+    +getEmail(): string
+}
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuKfCAYufIamkKKZEIImkLWWjJYrIgEPI00BTKY3RqyLA8JEl126GbvYRQgK0r9EPbmuHJSrDpCn14T86cQA1f5r70LshZWAADas8llJKab2mBWrDXBKmKP1sa3YoHK0fLv0vIEArN0wfUIb0hm40" alt="">
+    </div>
+</div>
+
+<h3>静的メンバー、クラス変数</h3>
+<p>{static} または {abstract} 修飾子を使用して、静的または抽象的なメソッドを定義します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+abstract class User {
+    -userID: int
+    -username: string
+    -email: string
+    +User(userID: int, username: string, email: string)
+    +getUserID(): int
+    +getUsername(): string
+    +getEmail(): string
+    {abstract} post(content: string): void
+}
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/NOzB3eCm34Jtd6AMGQKNo9ekUW0EuAOMYWH9XTrk47SdAIq_hwndlHcP7g83EONhI0IDy82nG9hhE-ttsi87tK2WdYsIuqExKEx9TmTqoIbcfrSugnKEMhbuBMlpjKovrVvfrZFV5wNJBUUS-4Y_hoQyegXnCIW7NTiiFj4_Ysa6" alt="">
+    </div>
+</div>
+
+<h3>多重度の定義</h3>
+<p>多重度を示すために、1, 0..1, *, 1..* などの数字を使用します。これらの数字は関連線の両側に配置されます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+class Post {
+    -postID: int
+    -content: string
+    -user: User
+    -comments: List< Comment >
+    -likes: int
+    +Post(postID: int, content: string, user: User)
+    +getPostID(): int
+    +getContent(): string
+    +getUser(): User
+    +addComment(comment: Comment): void
+    +getComments(): List< Comment >
+    +like(): void
+    +getLikes(): int
+}
+
+class Comment {
+}
+
+class Like {
+}
+
+Post *-- "*" Comment : Aggregation
+Post *-- Like : Aggregation
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/RL4x3eCm3DqvXTM9xmMYggAYIoK6bXu0GHH5XL1XqmNrxeq9lw9cYEBdz-nd9qKgUnhQngkQ4X6A3Wb63-n9NlPzlmdGXXnGTOQa8G58lJRAWGFANi33tWkfRIq91UGQwGoPY-7Yqer-IjngHjpGttMAuT0bXgr3u3HAKZ4f_61NoQAPapAyiyWPLZEy-epAkfwj-RDbiNYrl7UdwrrPDn8N-3TKn4FvHrNEaouEFzwyu4KvRX0JNJnjFqmIE8MdbIdWgbGlLKcwCnjbKltcKcbg-vLV" alt="">
+    </div>
+</div>
