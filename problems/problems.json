@@ -34,5 +34,23 @@
         "title":"図書館管理システム",
         "theme":"ユースケース図",
         "uml":"@startuml\nleft to right direction\n\nactor LibraryUser as User\nactor LibraryStaff as Staff\nactor System as S\n\nrectangle LibraryManagementSystem {\n  User -- (Search Books)\n  User -- (View Book Details)\n  User -- (Check Out Book)\n  User -- (Return Book)\n  User -- (Renew Book)\n  User -- (View Due Dates)\n  User -- (Place Hold)\n  User -- (Pay Fine)\n\n  Staff -- (Add Book)\n  Staff -- (Remove Book)\n  Staff -- (Manage User Accounts)\n  Staff -- (Manage Loans)\n  Staff -- (Generate Reports)\n\n  S -- (Notify Overdue Users)\n}\n\nUser --> (Login)\nUser --> (Logout)\nUser --> (Register)\n\nStaff --> (Login)\nStaff --> (Logout)\nStaff --> (Manage System)\n\nUser --> (Receive Due Date Reminder)\nUser --> (Receive Hold Pickup Notice)\n\nStaff --> (Issue Library Card)\n\nUser --> (Receive Hold Available Notification)\n\nUser --> (Receive Fine Notice)\n\nUser --> (Receive Renewal Confirmation)\n@enduml"
+    },
+    {
+        "id":7,
+        "title":"ToDoリストアプリケーション",
+        "theme":"クラス図",
+        "uml":"@startuml\nclass Task {\n  -id: int\n  -title: string\n  -description: string\n  -dueDate: Date\n  -completed: boolean\n  +Task(id: int, title: string, description: string, dueDate: Date)\n  +getId(): int\n  +getTitle(): string\n  +getDescription(): string\n  +getDueDate(): Date\n  +isCompleted(): boolean\n  +markAsCompleted(): void\n}\n\nclass TaskList {\n  -tasks: List<Task>\n  +addTask(task: Task): void\n  +removeTask(task: Task): void\n  +getTasks(): List<Task>\n}\n\nclass User {\n  -id: int\n  -username: string\n  -email: string\n  +User(id: int, username: string, email: string)\n  +getId(): int\n  +getUsername(): string\n  +getEmail(): string\n}\n\nUser --> TaskList : Manages\nTaskList \"1\" -- \"*\" Task : Contains\n@enduml"
+    },
+    {
+        "id":8,
+        "title":"オンラインショピング",
+        "theme":"クラス図",
+        "uml":"@startuml\nclass User {\n  -userID: int\n  -username: string\n  -email: string\n  -password: string\n  -cart: Cart\n  +User(userID: int, username: string, email: string)\n  +addToCart(product: Product, quantity: int): void\n  +removeFromCart(product: Product, quantity: int): void\n  +viewCart(): Cart\n  +placeOrder(): Order\n}\n\nclass Product {\n  -productID: int\n  -name: string\n  -description: string\n  -price: double\n  +Product(productID: int, name: string, description: string, price: double)\n}\n\nclass Cart {\n  -cartID: int\n  -items: Map<Product, int>\n  +addToCart(product: Product, quantity: int): void\n  +removeFromCart(product: Product, quantity: int): void\n  +getCartItems(): Map<Product, int>\n}\n\nclass Order {\n  -orderID: int\n  -user: User\n  -orderDate: Date\n  -items: Map<Product, int>\n  -totalAmount: double\n  -status: string\n  +Order(user: User, orderDate: Date)\n  +addOrderItem(product: Product, quantity: int): void\n  +calculateTotalAmount(): double\n  +confirmOrder(): void\n}\n\nclass Payment {\n  -paymentID: int\n  -order: Order\n  -amount: double\n  -paymentDate: Date\n  -status: string\n  +Payment(order: Order, amount: double, paymentDate: Date)\n  +processPayment(): void\n}\n\nUser --> Cart : Uses\nUser --> Order : Places\nOrder --> Product : Contains\nPayment --> Order : For\n@enduml"
+    },
+    {
+        "id":9,
+        "title":"図書館管理システム",
+        "theme":"クラス図",
+        "uml":"@startuml\nabstract class Item {\n  -id: int\n  -title: string\n  -year: int\n  +Item(id: int, title: string, year: int)\n  +getId(): int\n  +getTitle(): string\n  +getYear(): int\n  +abstract getDetails(): string\n}\n\nclass Book {\n  +Book(id: int, title: string, year: int, author: string)\n  +getAuthor(): string\n  +getDetails(): string\n}\n\nclass DVD {\n  +DVD(id: int, title: string, year: int, director: string)\n  +getDirector(): string\n  +getDetails(): string\n}\n\nclass Library {\n  -items: List<Item>\n  +Library()\n  +addItem(item: Item): void\n  +removeItem(item: Item): void\n  +listItems(): List<Item>\n}\n\nclass Patron {\n  -id: int\n  -name: string\n  -checkedOutItems: List<Item>\n  +Patron(id: int, name: string)\n  +checkOutItem(item: Item): void\n  +returnItem(item: Item): void\n}\n\nItem <|-- Book\nItem <|-- DVD\nLibrary o-- Item : Composition\nPatron *-- Item : Aggregation\n@enduml"
     }
 ]
