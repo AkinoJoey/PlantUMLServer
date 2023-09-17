@@ -5,6 +5,7 @@
         "Jawira",
         "marginless",
         "plantuml",
-        "startuml"
+        "startuml",
+        "usecase"
     ]
 }
