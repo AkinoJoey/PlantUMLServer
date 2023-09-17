@@ -29,22 +29,22 @@
             <div id="editor-container" class="monaco-container"></div>
         </div>
         <div class="col-6">
-            <div id="preview-container" class="monaco-container" ></div>
+            <div id="preview-container" class="monaco-container overflow-auto"></div>
         </div>
     </div>
 
     <h2 class="text-center">Cheat Sheet</h2>
         <div class="tabs is-full">
-            <a>シーケンス図</a>
-                <h2>基本的な例</h2>
-                <p>こんな感じ</p>
-            <a>ユースケース図</a>
-            <a>クラス図</a>
-            <a>アクティビティ図</a>
-            <a>状態図</a>
-            <a>マインドマップ</a>
-            <a>ガント図</a>
+            <a class="tab-button" id="sequence">シーケンス図</a>         
+            <a class="tab-button" id="usecase">ユースケース図</a>
+            <a class="tab-button" id="class">クラス図</a>
+            <a class="tab-button" id="activity">アクティビティ図</a>
+            <a class="tab-button" id="state">状態図</a>
+            <a class="tab-button" id="mindmap">マインドマップ</a>
+            <a class="tab-button" id="gantt">ガント図</a>
         </div>
+        <div id="tab-content" class="container"></div>    
+
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs/loader.min.js"></script>
 <script src="js/main.js"></script>
