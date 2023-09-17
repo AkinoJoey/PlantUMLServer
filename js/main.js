@@ -124,3 +124,36 @@ async function deleteFile(filePath){
     
     return res;
 }
+
+// tabボタンの処理
+document.addEventListener('DOMContentLoaded', function () {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContent = document.getElementById('tab-content');
+
+    tabButtons.forEach(button =>  {
+
+        button.addEventListener('click', async function () {
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            this.classList.add('active');
+            
+            let id = this.id;
+            let html = await getCheatSheetData(id);
+            
+            tabContent.innerHTML = html;
+            
+    });
+
+    tabButtons[0].click();
+
+    });
+});
+
+async function getCheatSheetData(id){
+    let res = await fetch(`../CheatSheets/${id}.html`)
+        .then(response => response.text())
+
+        return res;
+}
