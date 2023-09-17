@@ -1,0 +1,141 @@
+<h3>ユースケース図の開始と終了</h3>
+<p>ユースケース図全体を開始するには、@startumlと@endumlを使用します。これらのキーワードで図の始まりと終わりを示します。</p>
+<pre>
+    <code>
+@startuml
+... // ユースケース図の内容
+@enduml
+    </code>
+</pre>
+</div>
+
+<h3>アクターの定義</h3>
+<p>アクターはユーザーや外部エンティティを表します。actorキーワードを使用してアクターを定義します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+actor User
+actor "外部システム" as ExternalSystem
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuKfCBialKWWjJYs2CfMUBfdsidd5uwRjZvjsFcvkUzoyG4aXiLZ1jQ8ajIWlCIUuihWaDPVB8JKl1QWV0000" alt="">
+    </div>
+</div>
+
+<h3>ユースケースの定義</h3>
+<p>ユースケースはシステムの機能や機能を表します。usecaseキーワードを使用するか、単語を丸かっこで囲んでユースケースを定義します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+actor User
+actor "外部システム" as ExternalSystem
+
+usecase ユーザー登録
+(ログイン)
+(注文作成)
+@enduml
+</code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDKU1AJ2x9Br88BKujWZAVBfdsidd5uwRjZvjsFcvkUzoyG26nMC6reYIrA2yn9xYok2Grbukhj3WrER4uLU5nyxB7pNiUDsq3aizdxdxPiubBut7psiTD6nutBNdSl5cJI-FPvXNFfhK_sJldMSS4JIukBeVKl1IWrG00" alt="">
+    </div>
+</div>
+
+<h3>アクターとユースケースの関連付け</h3>
+<p>アクターとユースケースを関連付け、アクターがどのユースケースに参加するかを示します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+actor User
+actor 外部システム as ExternalSystem
+
+usecase ユーザー登録
+(ログイン)
+(注文作成)
+
+User --> ユーザー登録
+User --> ログイン
+ExternalSystem --> 注文作成
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDKU1AJ2x9Br88BKujWZAVBfdsidd5uwRjZvjsFcvkUzoyG26nMC6reYIrA2yn9xYok2Grbukhj3WrER4uLU5nyxB7pNiUDsq3aizdxdxPiubBut7psiTD6nutBNdSl5cJI-FPvXNFfhK_sJldMSS4JIuka5KAkhfssBGYoI6Cu4Ar6ooFR2ON5vT3QbuAq3S0" alt="">
+    </div>
+</div>
+
+<h3>アクターとユースケースの関連詳細</h3>
+<p>関連に詳細情報を追加することができます。例えば、アクターが特定のユースケースを実行する際の条件や制約などを記述できます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+actor User
+actor 外部システム as ExternalSystem
+
+usecase ユーザー登録
+(ログイン)
+(注文作成)
+
+User --> ユーザー登録
+User --> ログイン
+ExternalSystem --> 注文作成
+
+User --> ユーザー登録 : ユーザー情報を提供
+ExternalSystem --> 注文作成 : 注文情報を受信
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDKU1AJ2x9Br88BKujWZAVBfdsidd5uwRjZvjsFcvkUzoyG26nMC6reYIrA2yn9xYok2Grbukhj3WrER4uLU5nyxB7pNiUDsq3aizdxdxPiubBut7psiTD6nutBNdSl5cJI-FPvXNFfhK_sJldMSS4JIuka5KAkhfssBGYoI6Cu4Ar6ooFR2PU8nMiK0IVDRS-NR3nSTEaP_qJdkoRJSXee6u85wxlQV_q9_iNSd4vfEQb0CCF0000" alt="">
+    </div>
+</div>
+
+<h3>アクターやユースケースをグループ化</h3>
+<p>packageキーワード、rectangleキーワードを使用して、アクターやユースケースをグループ化できます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+actor User
+actor 外部システム as ExternalSystem
+
+package システム {
+    rectangle ユーザー管理 as UserManager {
+    usecase ユーザー登録
+    (ログイン)
+    }
+
+rectangle 注文処理 as OrderProcessing {
+    (注文作成)
+    }
+}
+
+User --> ユーザー登録
+User --> ログイン
+ExternalSystem --> 注文作成
+
+User --> ユーザー登録 : ユーザー情報を提供
+ExternalSystem --> 注文作成 : 注文情報を受信
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDKU1AJ2x9Br88BKujWZAVBfdsidd5uwRjZvjsFcvkUzoyG26nMC6reYIrA2yn9xYok2Grbukh834vEp4zLG55NJMN0X0KfIQN9EQbvm0bcvSzRjxpk6aRa7o-Rk7p2MqWeq1s-IRc0NKNGNMK5gSc9nQZgP-v-sNF9h2qnkFcjO-RDZnkMlAuURCcMAYMYmjXpRFDAvvDQt_QlWngWNzHIcfHG55-ScfnSMPUEjGI3OYo9tldFEkO03C5Q0x8EGgwkdROR4UIGxY02pKimFB8PkCrKi4AHV1PS-lJ1HiVDqrwrZ_XoRxPX8m6wePmuVgUzaz_idyX5vT3QbuAC3u1" alt="">
+    </div>
+</div>
