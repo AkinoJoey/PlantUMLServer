@@ -89,10 +89,10 @@ if($id > 0 && $id <= count($data)){
                 <div id="editor-container" class="monaco-container"></div>
             </div>
             <div class="col-4">
-                <div id="preview-container" class="monaco-container" ></div>
+                <div id="preview-container" class="monaco-container overflow-auto" ></div>
             </div>
             <div class="col-4">
-                <div id="answer-container"  class="monaco-container" >
+                <div id="answer-container"  class="monaco-container overflow-auto" >
                     <img src="<?php echo $encodeUrl ?>">
                     <p class="is-hidden"><?php echo $uml ?></p>
                 </div>
