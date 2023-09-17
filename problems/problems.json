@@ -16,5 +16,23 @@
         "title": "電子メール送信のプロセス",
         "theme": "シーケンス図",
         "uml":"@startuml\nactor Customer\nparticipant EmailClient\nparticipant MailServer\nactor Recipient\n\nCustomer -> EmailClient: 電子メールを作成\nEmailClient -> EmailClient: メールの作成と編集\nEmailClient -> MailServer: メールを送信\nMailServer -> MailServer: メールの受信と転送\nMailServer -> Recipient: メールを受信\nRecipient --> MailServer: 受信確認\n\nCustomer -> EmailClient: ログアウト\n@enduml"
+    },
+    {
+        "id":4,
+        "title":"ブログプラットフォーム",
+        "theme":"ユースケース図",
+        "uml":"@startuml\nleft to right direction\n\nactor User as U\nactor Blogger as B\nactor Admin as A\nactor System as S\n\nrectangle BloggingPlatform {\n  U -- (Browse Blogs)\n  U -- (Read Blog)\n  U -- (Comment on Blog)\n\n  B -- (Create Blog)\n  B -- (Edit Blog)\n  B -- (Delete Blog)\n  B -- (Manage Comments)\n\n  A -- (Manage Blogs)\n  A -- (Manage Users)\n\n  S -- (Notify Users)\n}\n\nU --> (Login)\nU --> (Logout)\nU --> (Register)\n\nB --> (Login)\nB --> (Logout)\nB --> (Create Post)\nB --> (Edit Post)\nB --> (Delete Post)\nB --> (Manage Profile)\n\nA --> (Login)\nA --> (Logout)\nA --> (Manage System)\n@enduml"
+    },
+    {
+        "id":5,
+        "title":"航空予約システム",
+        "theme":"ユースケース図",
+        "uml":"@startuml\nleft to right direction\n\nactor Customer as C\nactor Administrator as Admin\nactor AirlineStaff as Staff\nactor System as S\n\nrectangle FlightReservationSystem {\n  C -- (Search Flights)\n  C -- (View Flight Details)\n  C -- (Book Flight)\n  C -- (Cancel Reservation)\n  C -- (View Reservation)\n\n  Admin -- (Manage Users)\n  Admin -- (Manage Flights)\n  Admin -- (Generate Reports)\n\n  Staff -- (Check-in Passengers)\n  Staff -- (Manage Flights)\n  Staff -- (Manage Reservations)\n  Staff -- (Process Payments)\n\n  S -- (Notify Customers)\n}\n\nC --> (Register)\nC --> (Login)\nC --> (Logout)\n\nAdmin --> (Login)\nAdmin --> (Logout)\nAdmin --> (Manage System)\n\nStaff --> (Login)\nStaff --> (Logout)\n\nC --> (Receive Confirmation Email)\nC --> (Receive Boarding Pass)\n\nStaff --> (Issue Boarding Pass)\n\nC --> (Receive Cancellation Confirmation)\n@enduml"
+    },
+    {
+        "id":6,
+        "title":"図書館管理システム",
+        "theme":"ユースケース図",
+        "uml":"@startuml\nleft to right direction\n\nactor LibraryUser as User\nactor LibraryStaff as Staff\nactor System as S\n\nrectangle LibraryManagementSystem {\n  User -- (Search Books)\n  User -- (View Book Details)\n  User -- (Check Out Book)\n  User -- (Return Book)\n  User -- (Renew Book)\n  User -- (View Due Dates)\n  User -- (Place Hold)\n  User -- (Pay Fine)\n\n  Staff -- (Add Book)\n  Staff -- (Remove Book)\n  Staff -- (Manage User Accounts)\n  Staff -- (Manage Loans)\n  Staff -- (Generate Reports)\n\n  S -- (Notify Overdue Users)\n}\n\nUser --> (Login)\nUser --> (Logout)\nUser --> (Register)\n\nStaff --> (Login)\nStaff --> (Logout)\nStaff --> (Manage System)\n\nUser --> (Receive Due Date Reminder)\nUser --> (Receive Hold Pickup Notice)\n\nStaff --> (Issue Library Card)\n\nUser --> (Receive Hold Available Notification)\n\nUser --> (Receive Fine Notice)\n\nUser --> (Receive Renewal Confirmation)\n@enduml"
     }
 ]
