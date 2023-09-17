@@ -1,0 +1,138 @@
+<h3>sequence図の開始と終了</h3>
+<p>シーケンス図全体を開始するには、@startumlと@endumlを使用します。これらのキーワードで図の始まりと終わりを示します。</p>
+<pre>
+    <code>
+@startuml
+... // シーケンス図の内容
+@enduml
+    </code>
+</pre>
+</div>
+
+
+
+<h3>参加者（オブジェクト）の定義</h3>
+<p>シーケンス図に登場するオブジェクト（参加者）を定義します。participantキーワードを使用します。オブジェクト名を<<>>で囲むことで、オブジェクトの種類を指定することもできます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+participant "Actor 1" as Actor1
+participant "Actor 2" as Actor2 << Database >>
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDKU0g038oapCB4lDA59GSaqloYnGCbHGIYnN0R4DiyaO8UIC56ni5byIInAJ4ubG5EpikXzIy5A2v0000" alt="">
+    </div>
+</div>
+
+<h3>メッセージの送信</h3>
+<p>オブジェクト間でのメッセージの送信を示します。矢印を使ってメッセージの流れを示し、->または --> で送信元から送信先を指定します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+participant "Actor 1" as Actor1
+participant "Actor 2" as Actor2 << Database >>
+
+Actor1 -> Actor2: メッセージ内容
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuIe0qfd9cGM9UIKAIex99Vb52ePA2ed52c2s8JPv8uIyaOADZO9BOabYKc9ngeAT7HSNH9k2hXrKWPN2u-Q5ZvkR7pVjVjoyvt7JZgTjhK_NxUHoICrB0TeF0000" alt="">
+    </div>
+</div>
+
+<h3>メッセージの応答</h3>
+<p>オブジェクトがメッセージに応答する場合、応答メッセージを描くことができます。-->または<--を使用して、応答の方向を示します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+participant "Actor 1" as Actor1
+participant "Actor 2" as Actor2 << Database >>
+
+Actor1 -> Actor2: メッセージ内容
+Actor2 --> Actor1: 応答内容
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuIe0qfd9cGM9UIKAIex99Vb52ePA2ed52c2s8JPv8uIyaOADZO9BOabYKc9ngeAT7HSNH9k2hXrKWPN2u-Q5ZvkR7pVjVjoyvt7JZgTjhK_NxUI2QjU5AJIqKdYwVyxpjLEWybnS3gbvAK0N0W00" alt="">
+    </div>
+</div>
+
+<h3>ループや条件分岐</h3>
+<p>シーケンス図にはループや条件分岐も描くことができます。altとelseを使って条件分岐を、loopを使ってループを示します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+participant "Actor 1" as Actor1
+participant "Actor 2" as Actor2 << Database >>
+
+Actor1 -> Actor2: メッセージ内容
+Actor2 --> Actor1: 応答内容
+
+alt 条件A
+    Actor1 -> Actor2: メッセージA
+else 条件B
+    Actor1 -> Actor2: メッセージB
+end
+
+loop 5 times
+    Actor1 -> Actor2: メッセージ
+end
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuIe0qfd9cGM9UIKAIex99Vb52ePA2ed52c2s8JPv8uIyaOADZO9BOabYKc9ngeAT7HSNH9k2hXrKWPN2u-Q5ZvkR7pVjVjoyvt7JZgTjhK_NxUI2QjU5AJIqKdYwVyxpjLEWybo9EIKAp-OkVB9xcoEN0X0GDDYHApK7w0Y87YVYz3XnfUQbS77bvESNA9Wgb6JcfXOJfn6YZyi1I0534G00" alt="">
+    </div>
+</div>
+
+<h3>コメント</h3>
+<p>シーケンス図にコメントを追加するには、note left ofやnote right ofを使って、オブジェクトの横にコメントを配置します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+participant "Actor 1" as Actor1
+participant "Actor 2" as Actor2 << Database >>
+
+Actor1 -> Actor2: メッセージ内容
+Actor2 --> Actor1: 応答内容
+
+alt 条件A
+    Actor1 -> Actor2: メッセージA
+else 条件B
+    Actor1 -> Actor2: メッセージB
+end
+
+loop 5 times
+    Actor1 -> Actor2: メッセージ
+end
+
+note left of Actor1
+    これはコメントです
+end note
+
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuIe0qfd9cGM9UIKAIex99Vb52ePA2ed52c2s8JPv8uIyaOADZO9BOabYKc9ngeAT7HSNH9k2hXrKWPN2u-Q5ZvkR7pVjVjoyvt7JZgTjhK_NxUI2QjU5AJIqKdYwVyxpjLEWybo9EIKAp-OkVB9xcoEN0X0GDDYHApK7w0Y87YVYz3XnfUQbS77bvESNA9Wgb6JcfXOJfn6YBo-_95KX9pMjH24_3HPW8EsF6oS_RkfvtBZ-STDci4OWsV6uSVdZnfaWZGeWVLnS3a0cC0e0" alt="">
+    </div>
+</div>
