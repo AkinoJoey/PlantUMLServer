@@ -7,7 +7,7 @@ $json = file_get_contents('../problems/problems.json');
 $data = json_decode($json, true);
 
 $id = $_GET['id'] ?? 0;
-$title = "UML問題集";
+$title = "UML Exercises";
 
 if($id > 0 && $id <= count($data)){
     $index = $id - 1;
@@ -33,7 +33,7 @@ if($id > 0 && $id <= count($data)){
             <div class="nav-right">
                 <div class="tabs">
                     <a href="../">Editor</a>
-                    <a class="active"  href="./problems.php">Problems</a>
+                    <a class="active"  href="./problems.php">Exercises</a>
                 </div>
             </div>
         </nav>
