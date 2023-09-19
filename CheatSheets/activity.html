@@ -1,14 +1,73 @@
-<h3></h3>
-<p></p>
+<h3>アクティビティ図の開始と終了</h3>
+<p>アクティビティ図全体を開始するには、@startumlと@endumlを使用します。これらのキーワードで図の始まりと終わりを示します。</p>
+<pre>
+    <code>
+@startuml
+... // アクティビティ図の内容
+@enduml
+    </code>
+</pre>
+</div>
+
+<h3>アクティビティへのラベル付け</h3>
+<p>アクティビティのラベルは:で開始し;で終了します。</p>
 <div class="row">
     <div class="col-6">
         <pre>
             <code>
-
+@startuml 
+:システムを起動;
+@enduml
             </code>
         </pre>
     </div>
     <div class="col-6 is-center">
-        <img src="" alt="">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuR9wtBJzSTFEnyrjZviNF6wQz6BhzgVTKwsv75BpKe3o0000" alt="">
+    </div>
+</div>
+
+<h3>図の開始と終了を示す</h3>
+<p>startキーワードで図の開始、stopキーワードまたはendキーワードで図の終了を示します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+start
+:システムを起動;
+end
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pkAmUDsr_tBJpSNFRu-O5ZviclTYw_MdtL6kkrBmKBWSW0LG90000" alt="">
+    </div>
+</div>
+
+<h3>条件文を追加</h3>
+<p>startキーワードで図の開始、stopキーワードまたはendキーワードで図の終了を示します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startuml
+start
+:システムを起動;
+
+if(ゲストモードで参加しますか？)then(yes)
+    :利用できるサービスは限定される
+    履歴は残らない;
+else(no)
+    :履歴は残る;
+endif
+
+end
+@enduml
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/LOyx2i9G44NxjmhBP0knSIk22GeQmSJ2SjuJKQCeVf3O60Jn0qOKHGHnCvVdft8BZW4BfvWPEFVUOJAUdwturL9H98km8C-G5wW6L0GvU9xEEXYdXIWu1kGXGKseETGLgWLQwfxKxGWq0Tr08IXuNsUcdxTTesPxfaXnMRgvVenMh0Pr8GF8K-8VVkDezmhxEfw2nf0Tfeb5xnVtxP7XFMOv7zg0wcbX5ptRSCk_s3zHmDZD5Hpn7IB3ZT_w0000" alt="">
     </div>
 </div>
