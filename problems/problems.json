@@ -70,5 +70,23 @@
         "title":"ソフトウェア開発プロジェクトのライフサイクル",
         "theme":"アクティビティ図",
         "uml":"@startuml\nstart\n:Gather Requirements;\nif (Requirements Gathered) then (yes)\n  :Design Architecture;\n  :Develop Code;\n  if (Code Development Completed) then (yes)\n    :Perform Unit Testing;\n    if (Unit Testing Passed) then (yes)\n      :Integrate Components;\n      :Perform System Testing;\n      if (System Testing Passed) then (yes)\n        :Prepare Documentation;\n        :User Acceptance Testing;\n        if (UAT Passed) then (yes)\n          :Deploy to Production;\n          if (Deployment Successful) then (yes)\n            :Monitor and Maintain;\n            :End Project;\n          else (no)\n            :Handle Deployment Issues;\n          endif\n        else (no)\n          :Revise Software;\n        endif\n      else (no)\n        :Resolve System Issues;\n      endif\n    else (no)\n      :Fix Code Defects;\n    endif\n  else (no)\n    :Continue Development;\n  endif\nelse (no)\n  :Review Requirements;\nendif\nstop\n@enduml"
+    },
+    {
+        "id":13,
+        "title":"ユーザー管理システム",
+        "theme":"状態図",
+        "uml":"@startuml\n[*] --> Inactive : User Registration\nInactive --> Active : Activate User\nActive --> Locked : Lock User Account\nActive --> Inactive : Deactivate User\nLocked --> Active : Unlock User Account\nLocked --> Inactive : Deactivate User\nInactive --> Deleted : Delete User\nActive --> Deleted : Delete User\nLocked --> Deleted : Delete User\nDeleted --> [*] : Remove User from System\n@enduml"
+    },
+    {
+        "id":14,
+        "title":"ATMシステム",
+        "theme":"状態図",
+        "uml":"@startuml\n[*] --> Idle : Startup\nIdle --> CardInserted : Insert Card\nCardInserted --> PinEntry : Enter PIN\nPinEntry --> TransactionSelection : Correct PIN\nPinEntry --> CardEjected : Incorrect PIN (3 Attempts)\nTransactionSelection --> BalanceInquiry : Select Balance Inquiry\nTransactionSelection --> Withdrawal : Select Withdrawal\nTransactionSelection --> Deposit : Select Deposit\nBalanceInquiry --> TransactionComplete : View Balance\nWithdrawal --> TransactionComplete : Withdraw Cash\nDeposit --> TransactionComplete : Deposit Funds\nTransactionComplete --> CardEjected : Eject Card\nTransactionComplete --> Idle : Return to Idle\nCardEjected --> Idle : Remove Card\n@enduml"
+    },
+    {
+        "id":15,
+        "title":"オンライン予約システム",
+        "theme":"状態図",
+        "uml":"@startuml\n[*] --> Idle : System Start\n\nstate Idle {\n  [*] --> Available : Event Created\n  Available --> Full : Tickets Sold Out\n  Available --> Cancelled : Event Cancelled\n  Available --> Reserved : Reserve Ticket\n  Reserved --> Available : Cancel Reservation\n  Reserved --> Booked : Confirm Reservation\n}\n\nstate Full {\n  Full --> Available : Tickets Available\n}\n\nstate Cancelled {\n  Cancelled --> Archived : Archive Event\n}\n\nstate Booked {\n  Booked --> CheckedIn : Check In\n  CheckedIn --> Attended : Attend Event\n  CheckedIn --> NoShow : Mark as No-Show\n  NoShow --> Attended : Attend Event\n  Attended --> Archived : Archive Event\n  Attended --> CheckedIn : Check In Again\n  Attended --> NoShow : Mark as No-Show Again\n}\n\nstate Attended {\n  Attended --> Archived : Archive Event\n}\n\nstate Archived {\n  Archived --> [*] : Remove Event from System\n}\n\n@enduml"
     }
 ]
