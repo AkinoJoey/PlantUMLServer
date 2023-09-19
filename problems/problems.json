@@ -88,5 +88,23 @@
         "title":"オンライン予約システム",
         "theme":"状態図",
         "uml":"@startuml\n[*] --> Idle : System Start\n\nstate Idle {\n  [*] --> Available : Event Created\n  Available --> Full : Tickets Sold Out\n  Available --> Cancelled : Event Cancelled\n  Available --> Reserved : Reserve Ticket\n  Reserved --> Available : Cancel Reservation\n  Reserved --> Booked : Confirm Reservation\n}\n\nstate Full {\n  Full --> Available : Tickets Available\n}\n\nstate Cancelled {\n  Cancelled --> Archived : Archive Event\n}\n\nstate Booked {\n  Booked --> CheckedIn : Check In\n  CheckedIn --> Attended : Attend Event\n  CheckedIn --> NoShow : Mark as No-Show\n  NoShow --> Attended : Attend Event\n  Attended --> Archived : Archive Event\n  Attended --> CheckedIn : Check In Again\n  Attended --> NoShow : Mark as No-Show Again\n}\n\nstate Attended {\n  Attended --> Archived : Archive Event\n}\n\nstate Archived {\n  Archived --> [*] : Remove Event from System\n}\n\n@enduml"
+    },
+    {
+        "id":16,
+        "title":"旅行計画",
+        "theme":"マインドマップ",
+        "uml":"@startmindmap\n* Trip Planning\n** Destination\n*** Choose Destination\n*** Research Attractions\n** Transportation\n*** Flight Booking\n*** Accommodation\n** Itinerary\n*** Daily Schedule\n*** Places to Visit\n** Packing\n*** Clothing\n*** Essentials\n** Budget\n*** Expenses\n*** Currency Exchange\n@endmindmap"
+    },
+    {
+        "id":17,
+        "title":"プログラミング言語",
+        "theme":"マインドマップ",
+        "uml":"@startmindmap\n* Programming Languages\n** High-Level Languages\n*** General-Purpose\n**** Java\n**** Python\n**** C#\n**** Ruby\n*** Web Development\n**** JavaScript\n**** PHP\n**** Ruby on Rails\n**** TypeScript\n*** Data Science\n**** R\n**** Julia\n**** MATLAB\n** Low-Level Languages\n*** Assembly Language\n*** C\n*** C++\n*** Rust\n** Scripting Languages\n*** Bash\n*** PowerShell\n*** Perl\n*** Lua\n** Functional Languages\n*** Haskell\n*** Scala\n*** Erlang\n** Domain-Specific Languages\n*** SQL\n*** HTML/CSS\n*** LaTeX\n*** VHDL\n** Legacy Languages\n*** COBOL\n*** Fortran\n*** Ada\n@endmindmap"
+    },
+    {
+        "id":18,
+        "title":"ソフトウェアエンジニアリング",
+        "theme":"マインドマップ",
+        "uml":"@startmindmap\n* Software Engineering Project\n** Requirements\n*** Functional Requirements\n*** Non-functional Requirements\n** Design\n*** Architecture\n*** Database Schema\n*** User Interface\n** Development\n*** Coding\n*** Testing\n*** Debugging\n** Deployment\n*** Server Setup\n*** Deployment Process\n** Documentation\n*** User Manual\n*** Technical Documentation\n@endmindmap"
     }
 ]
