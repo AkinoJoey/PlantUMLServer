@@ -52,5 +52,23 @@
         "title":"図書館管理システム",
         "theme":"クラス図",
         "uml":"@startuml\nabstract class Item {\n  -id: int\n  -title: string\n  -year: int\n  +Item(id: int, title: string, year: int)\n  +getId(): int\n  +getTitle(): string\n  +getYear(): int\n  +abstract getDetails(): string\n}\n\nclass Book {\n  +Book(id: int, title: string, year: int, author: string)\n  +getAuthor(): string\n  +getDetails(): string\n}\n\nclass DVD {\n  +DVD(id: int, title: string, year: int, director: string)\n  +getDirector(): string\n  +getDetails(): string\n}\n\nclass Library {\n  -items: List<Item>\n  +Library()\n  +addItem(item: Item): void\n  +removeItem(item: Item): void\n  +listItems(): List<Item>\n}\n\nclass Patron {\n  -id: int\n  -name: string\n  -checkedOutItems: List<Item>\n  +Patron(id: int, name: string)\n  +checkOutItem(item: Item): void\n  +returnItem(item: Item): void\n}\n\nItem <|-- Book\nItem <|-- DVD\nLibrary o-- Item : Composition\nPatron *-- Item : Aggregation\n@enduml"
+    },
+    {
+        "id":10,
+        "title":"オンラインショッピングサイトの購入プロセス",
+        "theme":"アクティビティ図",
+        "uml":"@startuml\nstart\n:Choose Product;\nif (Product Selected) then (yes)\n  :Add to Cart;\n  if (Cart Contains Items) then (yes)\n    :View Cart;\n    if (Proceed to Checkout) then (yes)\n      :Enter Shipping Address;\n      :Select Payment Method;\n      if (Payment Successful) then (yes)\n        :Place Order;\n        if (Order Confirmed) then (yes)\n          :Generate Invoice;\n          :Send Confirmation Email;\n        else (no)\n          :Display Error Message;\n        endif\n      else (no)\n        :Display Payment Error;\n      endif\n    else (no)\n      :Continue Shopping;\n    endif\n  else (no)\n    :Continue Shopping;\n  endif\nelse (no)\n  :Continue Browsing;\nendif\nstop\n@enduml"
+    },
+    {
+        "id":11,
+        "title":"タスク管理プロセス",
+        "theme":"アクティビティ図",
+        "uml":"@startuml\nstart\n:Create Task;\nif (Task Created) then (yes)\n  :Assign Task;\n  if (Assigned to User) then (yes)\n    :Track Progress;\n    if (Progress Updated) then (yes)\n      :Review Progress;\n      if (Progress Approved) then (yes)\n        :Complete Task;\n        if (Task Completed) then (yes)\n          :Send Notification;\n        else (no)\n          :Display Error Message;\n        endif\n      else (no)\n        :Request Revision;\n      endif\n    else (no)\n      :Continue Tracking;\n    endif\n  else (no)\n    :Assign to User;\n  endif\nelse (no)\n  :Continue Creating;\nendif\nstop\n@enduml"
+    },
+    {
+        "id":12,
+        "title":"ソフトウェア開発プロジェクトのライフサイクル",
+        "theme":"アクティビティ図",
+        "uml":"@startuml\nstart\n:Gather Requirements;\nif (Requirements Gathered) then (yes)\n  :Design Architecture;\n  :Develop Code;\n  if (Code Development Completed) then (yes)\n    :Perform Unit Testing;\n    if (Unit Testing Passed) then (yes)\n      :Integrate Components;\n      :Perform System Testing;\n      if (System Testing Passed) then (yes)\n        :Prepare Documentation;\n        :User Acceptance Testing;\n        if (UAT Passed) then (yes)\n          :Deploy to Production;\n          if (Deployment Successful) then (yes)\n            :Monitor and Maintain;\n            :End Project;\n          else (no)\n            :Handle Deployment Issues;\n          endif\n        else (no)\n          :Revise Software;\n        endif\n      else (no)\n        :Resolve System Issues;\n      endif\n    else (no)\n      :Fix Code Defects;\n    endif\n  else (no)\n    :Continue Development;\n  endif\nelse (no)\n  :Review Requirements;\nendif\nstop\n@enduml"
     }
 ]
