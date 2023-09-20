@@ -1,0 +1,102 @@
+<h3>ガントチャートの開始と終了</h3>
+<p>ガントチャート全体を開始するには、@startumlと@endumlを使用します。これらのキーワードで図の始まりと終わりを示します。</p>
+<pre>
+    <code>
+@startgantt
+... // ガントチャートの内容
+@endgantt
+    </code>
+</pre>
+</div>
+
+<h3>タスクの定義</h3>
+<p>タスクの説明は[]で囲み、タスクの期間はlastキーワードで指定します。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startgantt
+[プロトタイプを設計] lasts 15 days
+[プロトタイプをテスト] lasts 5 days
+@endgantt
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgIK_CAodXYdxSFFrnyzh7pHsFc_O_Rbe2uZPDUh5YxOiL7R4AEOd59SKAXgOAAOcLnJZKFcvkUzoq4oW8KmvLxP2QbmAs0m00" alt="">
+    </div>
+</div>
+
+<p>プロジェクトの開始日はProject starts {yyyy-mm-dd}で指定します。タスクの開始はstartキーワード、タスクの終了はendキーワードで指定します。language ja で日付を日本語表示にします。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startgantt
+language ja
+
+Project starts 2020-07-01
+[プロトタイプを設計] starts 2020-07-02 and ends 2020-07-17
+[プロトタイプをテスト] starts 2020-07-18 and lasts 5 days
+@endgantt
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgIK_CAodXoadCIozDJ4zLo4hauWeeoizAJIvH0CiNAnWP61de6fZh6XXoHJzkdlwuUUtZvex7JViVDoq1SPiclLYnziMAZbWCzKOAYNaf2gbvAGWnGtCSPZnkRdlSj1CeY66CeGNOc9p4Og2WgK9AOcKnbmFGKB330G00" alt="">
+    </div>
+</div>
+
+<h3>依存関係の定義</h3>
+<p>starts at [タスク名]'s startやstarts at [タスク名]'s endなどの記述でタスクの依存関係を定義できます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startgantt
+language ja
+
+[プロトタイプを設計] lasts 15 days
+[プロトタイプを実装] lasts 10 days
+[テストを実装] lasts 5 days
+
+Project starts 2020-07-01
+[プロトタイプを設計] starts 2020-07-02
+[プロトタイプを実装] starts at [プロトタイプを設計]'s end
+[テストを実装] starts at [プロトタイプを実装]'s start
+@endgantt
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgIK_CAodXoadCIozDJ4zLo4hauef-t3pzSVFQnyqTZvlsFsvQ0k8sJNgnOksB5Hsn2Zc9nIN52eQc2Yc9bSKur3vTD__5ubQuMWEushR7JJl1Qj6KG4tZ2YZApqfDBb40EwrOmSZ0o43Nm5pNm920ez3L6n5m65HzOea2NdFLYnLIyrAmEvoG4L1rG2F0AhaSW2Q10ni0" alt="">
+    </div>
+</div>
+
+<h3>エイリアス（別名）の作成</h3>
+<p>asキーワードを使用して、タスクのエイリアスを作成できます。</p>
+<div class="row">
+    <div class="col-6">
+        <pre>
+            <code>
+@startgantt
+language ja
+
+[プロトタイプを設計] as [設計] lasts 15 days
+[プロトタイプを実装] as [実装] lasts 10 days
+[テストを実装] as [テスト] lasts 5 days
+
+Project starts 2020-07-01
+[設計] starts 2020-07-02
+[実装] starts at [設計]'s end
+[テスト] starts at [実装]'s start
+@endgantt
+            </code>
+        </pre>
+    </div>
+    <div class="col-6 is-center">
+        <img src="https://www.plantuml.com/plantuml/png/SoWkIImgIK_CAodXoadCIozDJ4zLo4hauef-t3pzSVFQnyqTZvlsFsvQ0k8sJNgnOksB5Hsn2ed52j4mTavYSKcnWg6fGafYPJ4EVK_NpN-nk1MY3yQ6wZE0wsjxtBGJh0z5ELmSfWDg4LT0KNvMQdA90jW7nGf61aO6kWRckWQ6N72deKiPSS5jXqebbi0zebwia9gNmeLi8P8Yg3wW8h0WbmDGBJZO0000" alt="">
+    </div>
+</div>
+
+<p>ガントチャートの構文と機能の詳細は<a href="https://plantuml.com/ja/gantt-diagram" target="_blank">PlantUMLの公式ドキュメンテーション</a>を参照してください。</p>
