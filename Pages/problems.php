@@ -75,7 +75,7 @@ if($id > 0 && $id <= count($data)){
             <div class="nav-right">
                 <div class="tabs">
                     <a href="../">Editor</a>
-                    <a href="../Pages/problems.php">Problems</a>
+                    <a href="../Pages/problems.php">Exercises</a>
                 </div>
             </div>
         </nav>
