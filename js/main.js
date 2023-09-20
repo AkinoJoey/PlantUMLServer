@@ -68,18 +68,23 @@ require(['vs/editor/editor.main'], function () {
         let plantUmlText = editor.getValue();
         let encoded = await encode(plantUmlText,format);
         let filePath = await download(encoded ,format);
-        
-        const downloadLink = document.createElement("a");
-        downloadLink.href = filePath;
-        downloadLink.download = `plantUML.${format}`; 
 
-        downloadLink.style.display = "none";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
+        fetch(filePath)
+            .then(function(res){
+                return res.blob();
+            })
+            .then(async function(blob){
+                const downloadLink = document.createElement('a');
+                downloadLink.href = window.URL.createObjectURL(blob);
+                
+                downloadLink.download = `plantUML.${format}`;
 
-        let resDeletedFile = await deleteFile(filePath);
-        console.log(resDeletedFile);
+                downloadLink.click();
+
+                window.URL.revokeObjectURL(downloadLink.href);
+                let resDeletedFile = await deleteFile(filePath);
+                console.log(resDeletedFile);
+            })
     });
 })
 
