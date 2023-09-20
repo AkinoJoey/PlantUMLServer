@@ -93,7 +93,7 @@ if($id > 0 && $id <= count($data)){
             </div>
             <div class="col-4">
                 <div id="answer-container"  class="monaco-container overflow-auto" >
-                    <img src="<?php echo $encodeUrl ?>">
+                    <img src="<?php echo $encodeUrl ?>" alt="answer uml">
                     <p class="is-hidden"><?php echo $uml ?></p>
                 </div>
             </div>
