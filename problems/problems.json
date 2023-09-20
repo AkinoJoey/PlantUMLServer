@@ -106,5 +106,23 @@
         "title":"ソフトウェアエンジニアリング",
         "theme":"マインドマップ",
         "uml":"@startmindmap\n* Software Engineering Project\n** Requirements\n*** Functional Requirements\n*** Non-functional Requirements\n** Design\n*** Architecture\n*** Database Schema\n*** User Interface\n** Development\n*** Coding\n*** Testing\n*** Debugging\n** Deployment\n*** Server Setup\n*** Deployment Process\n** Documentation\n*** User Manual\n*** Technical Documentation\n@endmindmap"
+    },
+    {
+        "id":19,
+        "title":"タスクの進捗状況",
+        "theme":"ガントチャート",
+        "uml":"@startgantt\n[foo] lasts 21 days\n[foo] is 40% completed\n[bar] lasts 30 days and is 10% complete\n@endgantt"
+    },
+    {
+        "id":20,
+        "title":"日付指定のマイルストーン",
+        "theme":"ガントチャート",
+        "uml":"@startgantt\nlanguage ja\n\nProject starts 2020-07-01\n[プロトタイプをテスト] lasts 10 days\n[プロトタイプが完成] happens 2020-07-10\n[製造ラインの準備] lasts 12 days\n[製造ラインの準備] starts at [プロトタイプをテスト]'s end\n@endgantt"
+    },
+    {
+        "id":21,
+        "title":"週ごとのタスク設定",
+        "theme":"ガントチャート",
+        "uml":"@startgantt\nprintscale weekly\nsaturday are closed\nsunday are closed\n\nProject starts the 1st of january 2021\n[プロトタイプ設計完了] as [TASK1] lasts 19 days\n[TASK1] is colored in Lavender/LightBlue\n[テスト] lasts 14 days\n[TASK1]->[テスト]\n\n2021-01-18 to 2021-01-22 are named [完了審査会]\n2021-01-18 to 2021-01-22 are colored in salmon \n@endgantt"
     }
 ]
