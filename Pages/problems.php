@@ -26,6 +26,7 @@ if($id > 0 && $id <= count($data)){
     <link rel="stylesheet" href="https://unpkg.com/chota@latest">
     <link rel="stylesheet" href="../css/style.css">
     <title><?php echo $title ?></title>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <?php if($id == 0 ) : ?>
