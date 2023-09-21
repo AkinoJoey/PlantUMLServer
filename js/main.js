@@ -67,7 +67,8 @@ require(['vs/editor/editor.main'], function () {
     downloadBtn.addEventListener('click', async function(){
         let plantUmlText = editor.getValue();
         let encoded = await encode(plantUmlText,format);
-        let filePath = await download(encoded ,format);
+        let filename = await download(encoded ,format);
+        let filePath = `../images/${filename}`;
 
         fetch(filePath)
             .then(function(res){
@@ -80,9 +81,8 @@ require(['vs/editor/editor.main'], function () {
                 downloadLink.download = `plantUML.${format}`;
 
                 downloadLink.click();
-
                 window.URL.revokeObjectURL(downloadLink.href);
-                let resDeletedFile = await deleteFile(filePath);
+                let resDeletedFile = await deleteFile(filename);
                 console.log(resDeletedFile);
             })
     });
@@ -119,11 +119,11 @@ async function download(url,format) {
     return res;
 }
 
-async function deleteFile(filePath){
+async function deleteFile(filename){
     let res = await fetch('deleteFile.php',{
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: filePath
+        body: filename
     })
     .then(response => response.text())
     
