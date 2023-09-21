@@ -1,5 +1,6 @@
 <?php
-$filePath = file_get_contents('php://input');
+$filename = file_get_contents('php://input');
+$filePath = "./images/{$filename}";
 
 if (file_exists($filePath)) {
     if (unlink($filePath)) {
