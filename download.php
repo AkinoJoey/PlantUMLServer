@@ -6,7 +6,7 @@ $format = $data['format'];
 $url = $data['url'];
 $imageData = file_get_contents($url);
 
-$filename = "./images/downloaded_image.{$format}";
-file_put_contents($filename, $imageData);
+$filename = "downloaded_image.{$format}";
+file_put_contents("./images/" . $filename, $imageData);
 
 echo $filename;
