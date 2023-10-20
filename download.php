@@ -7,6 +7,6 @@ $url = $data['url'];
 $imageData = file_get_contents($url);
 
 $filename = "downloaded_image.{$format}";
-file_put_contents("./images/" . $filename, $imageData);
+file_put_contents("./js/" . $filename, $imageData);
 
 echo $filename;

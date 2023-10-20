@@ -68,7 +68,7 @@ require(['vs/editor/editor.main'], function () {
         let plantUmlText = editor.getValue();
         let encoded = await encode(plantUmlText,format);
         let filename = await download(encoded ,format);
-        let filePath = `../images/${filename}`;
+        let filePath = `../js/${filename}`;
 
         fetch(filePath)
             .then(function(res){
