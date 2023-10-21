@@ -18,12 +18,12 @@ require(['vs/editor/editor.main'], function () {
     // 初期の表示
     displayPreview(editor.getValue());
 
-    async function displayPreview(text){
-        const encoded = await encode(text,format);
+    async function displayPreview(text) {
+        const encoded = await encode(text, format);
 
-        if(format == "png" || format == "svg"){
+        if (format == "png" || format == "svg") {
             previewContainer.innerHTML = `<img src="${encoded}">`;
-        }if(format == "txt"){
+        } if (format == "txt") {
             let ascii = await getAscii(encoded);
             previewContainer.innerHTML = `<pre>${ascii}</pre>`;
         }
@@ -34,100 +34,68 @@ require(['vs/editor/editor.main'], function () {
         displayPreview(plantUmlText);
     });
 
-    pngBtn.addEventListener('click',async function(){
-        if(format != 'png'){
-            const plantUmlText = editor.getValue();
-            const encoded = await encode(plantUmlText,'png');
-            previewContainer.innerHTML = `<img src="${encoded}">`;
-        }
-
-        format = 'png';
+    pngBtn.addEventListener('click', async function () {
+        handleFormatChange('png');
     })
 
-    svgBtn.addEventListener('click',async function(){
-        if(format != 'svg'){
-            const plantUmlText = editor.getValue();
-            const encoded = await encode(plantUmlText,'svg');
-            previewContainer.innerHTML = `<img src="${encoded}">`;
-        }
-        format = 'svg';
+    svgBtn.addEventListener('click', async function () {
+        handleFormatChange('svg');
     })
 
-    asciiBtn.addEventListener('click',async function(){
-        if(format != 'txt'){
-            const plantUmlText = editor.getValue();
-            const encoded = await encode(plantUmlText,'txt');
-            let ascii = await getAscii(encoded);
-            previewContainer.innerHTML = `<pre>${ascii}</pre>`;
-        }
-
-        format = 'txt';
+    asciiBtn.addEventListener('click', async function () {
+        handleFormatChange('txt');
     })
 
-    downloadBtn.addEventListener('click', async function(){
+    async function handleFormatChange(newFormat) {
+        if (format != newFormat) {
+            let plantUmlText = editor.getValue();
+            let encoded = await encode(plantUmlText, newFormat)
+
+            if (newFormat === "png" || newFormat === "svg") {
+                previewContainer.innerHTML = `<img src="${encoded}">`;
+            } else if (newFormat == "txt") {
+                let ascii = await getAscii(encoded);
+                console.log(ascii);
+                previewContainer.innerHTML = `<pre>${ascii}</pre>`;
+            }
+            format = newFormat;
+        }
+    }
+
+    downloadBtn.addEventListener('click', async function () {
         let plantUmlText = editor.getValue();
-        let encoded = await encode(plantUmlText,format);
-        let filename = await download(encoded ,format);
-        let filePath = `../js/${filename}`;
-
-        fetch(filePath)
-            .then(function(res){
-                return res.blob();
-            })
-            .then(async function(blob){
-                const downloadLink = document.createElement('a');
-                downloadLink.href = window.URL.createObjectURL(blob);
-                
-                downloadLink.download = `plantUML.${format}`;
-
-                downloadLink.click();
-                window.URL.revokeObjectURL(downloadLink.href);
-                let resDeletedFile = await deleteFile(filename);
-                console.log(resDeletedFile);
-            })
+        let encoded = await encode(plantUmlText, format);
+        await downloadImage(encoded);
     });
 })
 
-async function encode(text,format) {
+async function downloadImage(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    const blobURL = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobURL;
+    a.download = `plantUML.${format}`;
+    a.click();
+}
+
+async function encode(text, format) {
     let res = await fetch('encode.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({'format': format, 'text':text})
+        body: JSON.stringify({ 'format': format, 'text': text })
     })
-        .then(response => response.text())
 
-    return res;
+    return await res.text();
 }
 
-async function getAscii(encoded){
+async function getAscii(encoded) {
     let res = await fetch(encoded, {
         method: 'GET'
     })
-    .then(response=> response.text())
 
-    return res;
-}
-
-async function download(url,format) {
-    let res = await fetch('download.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({'format': format, 'url':url})
-    })
-    .then(response => response.text())
-
-    return res;
-}
-
-async function deleteFile(filename){
-    let res = await fetch('deleteFile.php',{
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: filename
-    })
-    .then(response => response.text())
-    
-    return res;
+    return await res.text();
 }
 
 // tabボタンの処理
@@ -135,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContent = document.getElementById('tab-content');
 
-    tabButtons.forEach(button =>  {
+    tabButtons.forEach(button => {
 
         button.addEventListener('click', async function () {
             tabButtons.forEach(btn => {
@@ -143,22 +111,21 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             this.classList.add('active');
-            
+
             let id = this.id;
             let html = await getCheatSheetData(id);
-            
-            tabContent.innerHTML = html;
-            
-    });
 
-    tabButtons[0].click();
+            tabContent.innerHTML = html;
+
+        });
+
+        tabButtons[0].click();
 
     });
 });
 
-async function getCheatSheetData(id){
+async function getCheatSheetData(id) {
     let res = await fetch(`../CheatSheets/${id}.html`)
-        .then(response => response.text())
 
-        return res;
+    return await res.text();
 }
