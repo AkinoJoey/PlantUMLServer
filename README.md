@@ -5,7 +5,7 @@
 https://texttouml.yuki-gakiya.com/
 
 ## Demo
-### エディターページ
+### トップページ
 ![demo](https://github.com/AkinoJoey/PlantUMLServer/assets/124570638/cb6d4197-fa5f-44d4-81e4-968515e196d2)
 
 ### 練習ページ
