@@ -26,6 +26,7 @@ PlantUMLの練習ができる別のページもあります。練習ページで
   - 使用言語： HTML, CSS, Javascript
   - HTTPリクエスト: Fetch API
   - コードエディタ: Monaco Editor
+  - CSSフレームワーク： chota
 
 - バックエンド
   - 使用言語： PHP
