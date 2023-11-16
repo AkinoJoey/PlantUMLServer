@@ -32,8 +32,9 @@ PlantUMLの練習ができる別のページもあります。練習ページで
   - 使用言語： PHP
   - PlantUML変換: [PlantUML Server](https://plantuml.com/server)
   - パッケージ管理: Composer
-  - Webサーバー: Nginx
+  - Webサーバー: NGINX
   - サーバー: Amazon EC2
+  - SSL/TLS証明書更新: Certbot
 
 ## 期間
 2023年9月11日から9日間かけて開発しました。
